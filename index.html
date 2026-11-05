@@ -1,927 +1,147 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="dark">
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Danya Musbah — Software Engineer</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Danya Musbah</title>
+<meta name="description" content="Danya Musbah, Software Engineering graduate of the University of Tripoli. Projects, skills, education and evidence.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-/* ============================================================
-   DESIGN SYSTEM — Colorblind-safe WCAG AA+ — Warm Dark Aurora
-   ============================================================ */
-:root {
-  --bg:#0a0b0f;
-  --bg1:#0f1018;
-  --bg2:#141520;
-  --surface:#1a1c2e;
-  --surface2:#21243a;
-  --border:rgba(56,189,176,.12);
-  --border2:rgba(56,189,176,.28);
-  /* Teal — safe for ALL CVD types */
-  --p:#38bdb0;
-  --p-lt:#5dd9cc;
-  --p-dim:rgba(56,189,176,.1);
-  --p-glow:rgba(56,189,176,.22);
-  /* Orange — clearly distinguishable from teal in deuteranopia/protanopia */
-  --a:#f0840a;
-  --a-lt:#ffaa40;
-  --a-dim:rgba(240,132,10,.1);
-  --a-glow:rgba(240,132,10,.18);
-  /* Green status */
-  --ok:#2dd4a0;
-  --ok-dim:rgba(45,212,160,.1);
-  /* Rose accent (used with shape cues, not alone) */
-  --rs:#f06292;
-  --rs-dim:rgba(240,98,146,.1);
-  /* Text — WCAG AAA on dark */
-  --t:#eef0f8;
-  --t2:#a8aec8;
-  --t3:#636a8a;
-  /* Shapes */
-  --r:20px;
-  --rsm:12px;
-  --rxs:8px;
-  /* Fonts */
-  --ff-disp:'Space Grotesk','Noto Sans Arabic',sans-serif;
-  --ff-body:'Space Grotesk','Noto Sans Arabic',system-ui,sans-serif;
-  --ff-mono:'JetBrains Mono','Noto Sans Arabic',monospace;
-}
-[data-theme="light"]{
-  --bg:#f4f3f0;--bg1:#eceae5;--bg2:#e3e0d8;
-  --surface:#ffffff;--surface2:#f8f7f4;
-  --border:rgba(20,140,130,.12);--border2:rgba(20,140,130,.25);
-  --p:#0d9488;--p-lt:#14b8a6;--p-dim:rgba(13,148,136,.08);--p-glow:rgba(13,148,136,.14);
-  --a:#c26400;--a-lt:#e07810;--a-dim:rgba(194,100,0,.08);--a-glow:rgba(194,100,0,.12);
-  --ok:#0f9b6e;--ok-dim:rgba(15,155,110,.08);
-  --rs:#c44878;--rs-dim:rgba(196,72,120,.08);
-  --t:#111118;--t2:#3a3e58;--t3:#787e9a;
-}
-
-/* ---- RESET ---- */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:var(--ff-body);background:var(--bg);color:var(--t);line-height:1.7;overflow-x:hidden;transition:background .5s,color .5s;-webkit-font-smoothing:antialiased}
-html[dir="rtl"] body{font-family:'Noto Sans Arabic','Space Grotesk',sans-serif}
-html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3{font-family:'Noto Sans Arabic',sans-serif;font-weight:800;letter-spacing:0}
-a{color:inherit;text-decoration:none}
-ul{list-style:none}
-button{font-family:inherit;cursor:pointer;border:none;background:none}
-img{display:block;max-width:100%}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--p);border-radius:5px}
-:focus-visible{outline:2.5px solid var(--p);outline-offset:3px;border-radius:4px}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-
-.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(18px,4vw,48px);position:relative;z-index:2}
-
-/* ---- SCROLL PROGRESS ---- */
-#spb{position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;background:linear-gradient(90deg,var(--p),var(--a),var(--rs));transform-origin:left;transform:scaleX(0);transition:transform .06s linear}
-
-/* ---- ANIMATED BG ORBS ---- */
-.orb-wrap{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.35;animation:orbFloat 20s ease-in-out infinite}
-.orb1{width:600px;height:600px;background:var(--p);top:-15%;right:-10%;animation-delay:0s}
-.orb2{width:500px;height:500px;background:var(--a);bottom:-10%;left:-8%;animation-delay:-7s;animation-duration:25s}
-.orb3{width:350px;height:350px;background:var(--rs);top:40%;left:50%;animation-delay:-14s;animation-duration:30s;opacity:.15}
-[data-theme="light"] .orb{opacity:.12;filter:blur(120px)}
-@keyframes orbFloat{
-  0%,100%{transform:translate(0,0) scale(1)}
-  25%{transform:translate(60px,-40px) scale(1.1)}
-  50%{transform:translate(-30px,50px) scale(.95)}
-  75%{transform:translate(-50px,-30px) scale(1.05)}
-}
-
-/* ---- NOISE ---- */
-.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");background-size:300px}
-
-/* ---- GRID BG ---- */
-.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:72px 72px;opacity:.4;mask-image:radial-gradient(ellipse 70% 70% at 50% 30%,black,transparent)}
-
-/* ---- CURSOR GLOW ---- */
-#cg{position:fixed;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,var(--p-glow) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);opacity:.5;transition:opacity .3s}
-@media(hover:none){#cg{display:none}}
-
-/* ---- CANVAS PARTICLES ---- */
-#pc{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4;transition:opacity .4s}
-[data-theme="light"] #pc{opacity:.15}
-
-/* ============================================================
-   NAVBAR
-   ============================================================ */
-#nav{position:fixed;top:0;inset-inline:0;z-index:900;height:68px;display:flex;align-items:center;transition:all .4s cubic-bezier(.16,1,.3,1)}
-#nav.scrolled{background:rgba(10,11,15,.88);backdrop-filter:blur(24px) saturate(1.8);border-bottom:1px solid var(--border);box-shadow:0 4px 40px rgba(0,0,0,.5)}
-[data-theme="light"] #nav.scrolled{background:rgba(244,243,240,.92)}
-.ni{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;max-width:1200px;margin:0 auto;padding:0 clamp(18px,4vw,48px)}
-.nl{display:flex;align-items:center;gap:12px;font-family:var(--ff-mono);font-size:.88rem;font-weight:600;color:var(--t);transition:transform .2s}
-.nl:hover{transform:scale(1.03)}
-.nm{width:38px;height:38px;border-radius:var(--rsm);background:linear-gradient(135deg,var(--p),var(--a));display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;color:#fff;box-shadow:0 3px 18px var(--p-glow);flex-shrink:0;animation:logoPulse 3s ease-in-out infinite}
-@keyframes logoPulse{0%,100%{box-shadow:0 3px 18px var(--p-glow)}50%{box-shadow:0 3px 30px var(--a-glow),0 3px 18px var(--p-glow)}}
-.nl-txt span{color:var(--p)}
-nav ul{display:flex;gap:3px;align-items:center}
-nav ul a{font-size:.8rem;font-weight:500;color:var(--t2);padding:8px 16px;border-radius:30px;transition:all .25s;position:relative}
-nav ul a:hover{color:var(--t);background:var(--p-dim)}
-nav ul a.active{color:var(--p);background:var(--p-dim)}
-nav ul a.active::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--a)}
-.na{display:flex;align-items:center;gap:7px}
-.ib{width:40px;height:40px;border-radius:var(--rsm);background:var(--surface);border:1px solid var(--border);color:var(--t2);display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .25s cubic-bezier(.16,1,.3,1)}
-.ib:hover{border-color:var(--p);color:var(--p);background:var(--p-dim);transform:translateY(-2px) scale(1.05);box-shadow:0 6px 20px var(--p-glow)}
-.lbtn{font-family:var(--ff-mono);font-size:.7rem;font-weight:700;width:auto;padding:0 14px;letter-spacing:.08em}
-html[dir="rtl"] .lbtn{letter-spacing:.04em}
-.hbg{display:none;flex-direction:column;gap:5px;padding:8px}
-.hbg span{display:block;width:22px;height:2px;background:var(--t2);border-radius:2px;transition:all .35s cubic-bezier(.16,1,.3,1)}
-.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg);background:var(--p)}
-.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);background:var(--p)}
-.mnav{display:none;position:fixed;top:68px;inset-inline:0;z-index:899;background:rgba(15,16,24,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 20px 24px;animation:sld .3s cubic-bezier(.16,1,.3,1)}
-.mnav.open{display:flex;flex-direction:column;gap:3px}
-.mnav a{font-size:.92rem;font-weight:500;color:var(--t2);padding:12px 18px;border-radius:var(--rsm);transition:all .2s;display:flex;align-items:center;gap:12px}
-.mnav a:hover{background:var(--p-dim);color:var(--p);transform:translateX(4px)}
-html[dir="rtl"] .mnav a:hover{transform:translateX(-4px)}
-.mnav a .fa-solid,.mnav a .fa-brands{width:22px;text-align:center;font-size:1rem}
-@keyframes sld{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
-
-/* ============================================================
-   HERO
-   ============================================================ */
-#hero{min-height:100svh;display:grid;place-items:center;padding-top:88px;padding-bottom:60px;position:relative;overflow:hidden}
-.hc{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,80px);align-items:center;width:100%}
-.hl{animation:hfade 1s cubic-bezier(.16,1,.3,1) .15s both}
-.hr{animation:hfade 1.2s cubic-bezier(.16,1,.3,1) .3s both;display:flex;justify-content:center;align-items:center;position:relative}
-@keyframes hfade{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-
-/* Badge */
-.hbadge{display:inline-flex;align-items:center;gap:9px;background:var(--ok-dim);border:1px solid rgba(45,212,160,.25);color:var(--ok);font-family:var(--ff-mono);font-size:.68rem;padding:7px 16px;border-radius:30px;margin-bottom:26px;letter-spacing:.06em;animation:badgeGlow 3s ease-in-out infinite}
-html[dir="rtl"] .hbadge{letter-spacing:.03em}
-@keyframes badgeGlow{0%,100%{box-shadow:0 0 0 0 rgba(45,212,160,.2)}50%{box-shadow:0 0 0 8px rgba(45,212,160,0)}}
-.bdot{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:bpulse 2s ease-in-out infinite;flex-shrink:0}
-@keyframes bpulse{0%,100%{box-shadow:0 0 0 0 rgba(45,212,160,.6)}50%{box-shadow:0 0 0 8px rgba(45,212,160,0)}}
-
-/* Name */
-.hname{font-family:var(--ff-disp);font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.06;letter-spacing:-.03em;margin-bottom:18px;font-weight:700}
-html[dir="rtl"] .hname{font-family:'Noto Sans Arabic',sans-serif;font-weight:900;letter-spacing:0;line-height:1.2}
-.hn1{display:block;color:var(--t);animation:textReveal 1s cubic-bezier(.16,1,.3,1) .4s both}
-.hn2{display:block;background:linear-gradient(120deg,var(--p) 0%,var(--p-lt) 40%,var(--a) 70%,var(--a-lt) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;background-size:300% auto;animation:shimmer 8s linear 1s infinite,textReveal 1s cubic-bezier(.16,1,.3,1) .6s both}
-@keyframes shimmer{0%{background-position:0% center}100%{background-position:300% center}}
-@keyframes textReveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-
-.tcursor{display:inline-block;width:3px;height:.85em;background:var(--p);vertical-align:text-bottom;margin-inline-start:3px;border-radius:2px;animation:tblink 1s step-end infinite}
-@keyframes tblink{0%,100%{opacity:1}50%{opacity:0}}
-
-.hrole{font-family:var(--ff-mono);font-size:clamp(.7rem,1.1vw,.82rem);color:var(--p-lt);margin-bottom:22px;opacity:0;animation:fadeUp .8s ease .8s forwards}
-.hdesc{font-size:clamp(.88rem,1.2vw,.98rem);color:var(--t2);line-height:1.85;max-width:520px;margin-bottom:38px;opacity:0;animation:fadeUp .8s ease .95s forwards}
-html[dir="rtl"] .hdesc{max-width:100%}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.hbtns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease 1.1s forwards}
-
-/* Buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff-body);font-size:.88rem;font-weight:600;padding:14px 28px;border-radius:var(--r);transition:all .3s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
-.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-100%);transition:transform .5s}
-.btn:hover::after{transform:translateX(100%)}
-.btn-p{background:linear-gradient(135deg,var(--p),#1a9e8f);color:#fff;box-shadow:0 4px 24px var(--p-glow)}
-.btn-p:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 40px var(--p-glow)}
-.btn-p .fa-solid,.btn-p .fa-brands{color:#fff}
-.btn-g{background:var(--surface);border:1.5px solid var(--border2);color:var(--t2)}
-.btn-g:hover{border-color:var(--a);color:var(--a);background:var(--a-dim);transform:translateY(-3px) scale(1.02);box-shadow:0 10px 30px var(--a-glow)}
-.btn-g .fa-solid,.btn-g .fa-brands{color:var(--a)}
-
-/* Hero Card */
-.hcard{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:clamp(24px,3vw,36px);width:100%;max-width:370px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);transition:all .45s cubic-bezier(.16,1,.3,1);overflow:hidden}
-.hcard::before{content:'';position:absolute;inset:-2px;border-radius:26px;background:conic-gradient(from 0deg,var(--p),var(--a),var(--rs),var(--p));z-index:-1;opacity:0;transition:opacity .4s;animation:borderSpin 6s linear infinite}
-.hcard:hover::before{opacity:1}
-@keyframes borderSpin{to{transform:rotate(360deg)}}
-.hcard:hover{transform:translateY(-8px) rotate(.3deg);box-shadow:0 40px 100px rgba(0,0,0,.5)}
-.hcard-inner{position:relative;background:var(--surface);border-radius:22px;z-index:1;padding:clamp(22px,3vw,34px)}
-.av{width:72px;height:72px;border-radius:18px;background:linear-gradient(135deg,var(--p) 0%,var(--a) 50%,var(--rs) 100%);display:flex;align-items:center;justify-content:center;font-family:var(--ff-disp);font-size:1.5rem;color:#fff;margin-bottom:18px;box-shadow:0 6px 24px var(--p-glow);animation:avGlow 4s ease-in-out infinite;letter-spacing:-.02em}
-@keyframes avGlow{0%,100%{box-shadow:0 6px 24px var(--p-glow)}33%{box-shadow:0 6px 24px var(--a-glow)}66%{box-shadow:0 6px 24px rgba(240,98,146,.2)}}
-.cn{font-size:1.02rem;font-weight:700;margin-bottom:4px}
-.cr{font-family:var(--ff-mono);font-size:.68rem;color:var(--p-lt);margin-bottom:22px}
-.ckpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
-.kpi{background:var(--bg1);border:1px solid var(--border);border-radius:var(--rsm);padding:14px;text-align:center;transition:all .3s}
-.kpi:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2)}
-.kv{font-size:1.5rem;font-weight:800;font-family:var(--ff-disp);background:linear-gradient(120deg,var(--p),var(--a));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:5px}
-.kl{font-size:.6rem;color:var(--t3);font-weight:600;letter-spacing:.03em;text-transform:uppercase}
-.cloc{display:flex;align-items:center;gap:9px;background:var(--bg1);border:1px solid var(--border);border-radius:var(--rsm);padding:11px 14px;font-size:.74rem;color:var(--t2);font-family:var(--ff-mono);transition:border-color .2s}
-.cloc:hover{border-color:var(--border2)}
-.cloc .fa-solid{color:var(--a);font-size:.95rem;flex-shrink:0}
-
-/* Float badges */
-.fb{position:absolute;background:var(--surface);border:1px solid var(--border2);border-radius:var(--rsm);padding:9px 14px;font-size:.66rem;font-family:var(--ff-mono);color:var(--t2);white-space:nowrap;box-shadow:0 8px 28px rgba(0,0,0,.4);display:flex;align-items:center;gap:7px;backdrop-filter:blur(10px)}
-.fb .fa-solid{font-size:.85rem}
-.fb1{top:-16px;right:-32px;animation:fbb 4.5s ease-in-out infinite}
-.fb1 .fa-solid{color:var(--p)}
-.fb2{bottom:32px;left:-42px;animation:fbb 4s ease-in-out 1.2s infinite}
-.fb2 .fa-solid{color:var(--a)}
-.fb3{bottom:-16px;right:20px;animation:fbb 5s ease-in-out .6s infinite}
-.fb3 .fa-solid{color:var(--rs)}
-@keyframes fbb{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-8px) rotate(1deg)}75%{transform:translateY(4px) rotate(-1deg)}}
-
-/* ============================================================
-   SECTION COMMONS
-   ============================================================ */
-section{padding:clamp(80px,12vh,120px) 0;position:relative}
-section:nth-child(even){background:var(--bg1)}
-
-/* Wave divider */
-.wave-div{position:absolute;top:-1px;left:0;right:0;height:60px;overflow:hidden;z-index:3}
-.wave-div svg{width:100%;height:100%;display:block}
-.wave-div path{fill:var(--bg1)}
-section:nth-child(odd) .wave-div path{fill:var(--bg)}
-
-.ey{display:inline-flex;align-items:center;gap:9px;font-family:var(--ff-mono);font-size:.66rem;color:var(--p);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;font-weight:600}
-html[dir="rtl"] .ey{letter-spacing:.04em}
-.ey::before{content:'//';color:var(--t3);font-weight:400}
-html[dir="rtl"] .ey::before{content:'\\\\'}
-.st{font-family:var(--ff-disp);font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.08;letter-spacing:-.03em;margin-bottom:16px;color:var(--t)}
-html[dir="rtl"] .st{font-family:'Noto Sans Arabic',sans-serif;font-weight:900;letter-spacing:0;line-height:1.25}
-.und{width:56px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--p),var(--a));margin-bottom:22px;position:relative;overflow:hidden}
-.und::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:shineBar 2.5s ease-in-out infinite}
-@keyframes shineBar{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-.ssub{font-size:clamp(.88rem,1.2vw,.96rem);color:var(--t2);max-width:580px;line-height:1.85;margin-bottom:60px}
-html[dir="rtl"] .ssub{max-width:100%}
-
-/* Reveal animations */
-.rv{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
-.rv.fl{transform:translateX(-34px)}
-.rv.fr{transform:translateX(34px)}
-.rv.sc{transform:scale(.94)}
-.rv.vis{opacity:1!important;transform:none!important}
-.d1{transition-delay:.08s!important}.d2{transition-delay:.16s!important}.d3{transition-delay:.24s!important}.d4{transition-delay:.32s!important}.d5{transition-delay:.4s!important}.d6{transition-delay:.48s!important}
-
-/* ============================================================
-   ABOUT
-   ============================================================ */
-.ag{display:grid;grid-template-columns:3fr 2fr;gap:clamp(36px,5vw,70px);align-items:start}
-.at p{font-size:clamp(.86rem,1.15vw,.95rem);color:var(--t2);line-height:1.88;margin-bottom:18px}
-.at p strong{color:var(--t);font-weight:700}
-.at p .hl{color:var(--p-lt);font-weight:600}
-
-.ec{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px 26px;margin-top:28px;position:relative;overflow:hidden;transition:all .3s}
-.ec:hover{border-color:var(--border2);box-shadow:0 12px 40px rgba(0,0,0,.25)}
-.ec::before{content:'';position:absolute;top:0;inset-inline:0;height:3px;background:linear-gradient(90deg,var(--p),var(--a),var(--rs))}
-.eh{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
-.eic{width:46px;height:46px;flex-shrink:0;background:var(--p-dim);border:1px solid rgba(56,189,176,.22);border-radius:var(--rsm);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--p);transition:transform .3s}
-.ec:hover .eic{transform:rotate(-8deg) scale(1.1)}
-.ein{font-size:.68rem;color:var(--t3);margin-bottom:4px;font-family:var(--ff-mono)}
-.edg{font-weight:700;font-size:.96rem;margin-bottom:3px}
-.edf{font-size:.78rem;color:var(--p-lt);font-weight:500}
-.gr{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
-.gc{font-family:var(--ff-mono);font-size:.66rem;font-weight:600;padding:5px 14px;border-radius:20px;border:1.5px solid;display:inline-flex;align-items:center;gap:6px;transition:transform .2s}
-.gc:hover{transform:translateY(-1px)}
-.gc .fa-solid{font-size:.72rem}
-.gb{background:var(--p-dim);border-color:rgba(56,189,176,.3);color:var(--p-lt)}
-.ga{background:var(--a-dim);border-color:rgba(240,132,10,.3);color:var(--a-lt)}
-
-.sg{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
-.sp{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--border);color:var(--t2);font-size:.78rem;font-weight:500;padding:9px 16px;border-radius:var(--rsm);transition:all .3s cubic-bezier(.16,1,.3,1)}
-.sp .fa-brands,.sp .fa-solid{font-size:1.1rem;transition:transform .3s}
-.sp:hover{border-color:var(--p);color:var(--p);background:var(--p-dim);transform:translateY(-3px);box-shadow:0 8px 24px var(--p-glow)}
-.sp:hover .fa-brands,.sp:hover .fa-solid{transform:scale(1.15)}
-.sp.github:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.08)}
-.sp.github:hover .fa-brands{color:#fff}
-.sp.github .fa-brands{color:#e6edf3}
-.sp.linkedin:hover{border-color:#0a66c2;color:#0a66c2;background:rgba(10,102,194,.1)}
-.sp.linkedin .fa-brands{color:#0a66c2}
-.sp.youtube:hover{border-color:#ff0033;color:#ff0033;background:rgba(255,0,51,.08)}
-.sp.youtube .fa-brands{color:#ff0033}
-.sp.instagram:hover{border-color:var(--rs);color:var(--rs);background:var(--rs-dim)}
-.sp.instagram .fa-brands{color:var(--rs)}
-
-/* Stats */
-.as{display:flex;flex-direction:column;gap:14px}
-.si{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;display:flex;align-items:center;gap:16px;transition:all .35s cubic-bezier(.16,1,.3,1)}
-.si:hover{border-color:var(--border2);transform:translateX(6px);box-shadow:0 8px 30px rgba(0,0,0,.25)}
-html[dir="rtl"] .si:hover{transform:translateX(-6px)}
-.sib{width:48px;height:48px;flex-shrink:0;border-radius:var(--rsm);display:flex;align-items:center;justify-content:center;font-size:1.15rem;transition:transform .3s}
-.si:hover .sib{transform:rotate(-6deg) scale(1.1)}
-.sb{background:var(--p-dim);color:var(--p)}
-.sam{background:var(--a-dim);color:var(--a)}
-.sg2{background:var(--ok-dim);color:var(--ok)}
-.sr{background:var(--rs-dim);color:var(--rs)}
-.sv{font-size:1.4rem;font-weight:800;font-family:var(--ff-disp);line-height:1;margin-bottom:4px}
-.sd{font-size:.7rem;color:var(--t3);line-height:1.45}
-
-.cs{display:flex;flex-direction:column;gap:11px;margin-top:28px}
-.cr2{display:flex;align-items:center;gap:13px;font-size:.84rem;color:var(--t2);transition:all .2s}
-.cr2:hover{color:var(--p);transform:translateX(4px)}
-html[dir="rtl"] .cr2:hover{transform:translateX(-4px)}
-.ci{width:38px;height:38px;flex-shrink:0;border-radius:var(--rsm);background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--p);font-size:.95rem;transition:all .25s}
-.cr2:hover .ci{border-color:var(--p);background:var(--p-dim);transform:scale(1.08)}
-
-/* ============================================================
-   SKILLS — Bento Grid
-   ============================================================ */
-.skl{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:auto;gap:16px}
-.skl .skc:nth-child(1){grid-row:span 2}
-.skc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
-.skc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .4s}
-.skc:hover::before{transform:scaleX(1)}
-.skc:hover{border-color:var(--border2);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
-.sfe::before{background:var(--p)}
-.sbe::before{background:var(--a)}
-.sdb::before{background:var(--ok)}
-.sse::before{background:var(--rs)}
-.sat::before{background:#60aaff}
-.skh{display:flex;align-items:center;gap:13px;margin-bottom:18px}
-.ski{width:44px;height:44px;flex-shrink:0;border-radius:var(--rsm);display:flex;align-items:center;justify-content:center;font-size:1.15rem;transition:transform .3s}
-.skc:hover .ski{transform:rotate(-8deg) scale(1.12)}
-.ife{background:var(--p-dim);color:var(--p);border:1px solid rgba(56,189,176,.2)}
-.ibe{background:var(--a-dim);color:var(--a);border:1px solid rgba(240,132,10,.2)}
-.idb{background:var(--ok-dim);color:var(--ok);border:1px solid rgba(45,212,160,.2)}
-.ise{background:var(--rs-dim);color:var(--rs);border:1px solid rgba(240,98,146,.2)}
-.iat{background:rgba(96,170,255,.1);color:#60aaff;border:1px solid rgba(96,170,255,.2)}
-.skn{font-size:.88rem;font-weight:700}
-.tc{display:flex;flex-wrap:wrap;gap:7px}
-.skt{font-family:var(--ff-mono);font-size:.64rem;padding:5px 11px;border-radius:var(--rxs);background:var(--bg1);border:1px solid var(--border);color:var(--t3);transition:all .25s;font-weight:500}
-.skc:hover .skt{color:var(--t2);border-color:var(--border2)}
-.skt:hover{color:var(--p);border-color:var(--p);background:var(--p-dim);transform:translateY(-1px)}
-
-/* ============================================================
-   PROJECTS
-   ============================================================ */
-.pg{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.pc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative}
-.pc::before{content:'';position:absolute;top:0;inset-inline:0;height:3px;background:linear-gradient(90deg,var(--p),var(--a),var(--rs));transform:scaleX(0);transform-origin:left;transition:transform .4s}
-html[dir="rtl"] .pc::before{transform-origin:right}
-.pc:hover{transform:translateY(-7px);border-color:var(--border2);box-shadow:0 28px 70px rgba(0,0,0,.4)}
-.pc:hover::before{transform:scaleX(1)}
-.pf{border-color:rgba(56,189,176,.35)}
-.pf::before{transform:scaleX(1);background:linear-gradient(90deg,var(--p),var(--a),var(--rs))}
-.pb{padding:26px 26px 22px;flex:1}
-.pm{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.pn2{font-family:var(--ff-mono);font-size:.62rem;color:var(--t3)}
-.pbdg{font-family:var(--ff-mono);font-size:.6rem;padding:4px 12px;border-radius:20px;display:flex;align-items:center;gap:6px;font-weight:600}
-.pbdg .fa-solid{font-size:.75rem}
-.pbst{background:var(--a-dim);border:1px solid rgba(240,132,10,.28);color:var(--a-lt)}
-.pbtm{background:var(--bg2);border:1px solid var(--border);color:var(--t3)}
-.ptit{font-size:1.2rem;font-weight:700;margin-bottom:5px}
-.psub{font-size:.74rem;color:var(--p-lt);margin-bottom:14px;font-family:var(--ff-mono);font-weight:500}
-.pdsc{font-size:.86rem;color:var(--t2);line-height:1.78}
-.pft{padding:16px 26px 22px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:auto}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-family:var(--ff-mono);font-size:.6rem;background:var(--bg1);border:1px solid var(--border);color:var(--t3);padding:4px 10px;border-radius:var(--rxs);font-weight:500;transition:all .2s}
-.chip:hover{color:var(--p);border-color:var(--p)}
-.pls{display:flex;gap:7px}
-.lp{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;font-weight:600;background:var(--bg1);border:1px solid var(--border);color:var(--t2);padding:7px 14px;border-radius:var(--rsm);transition:all .25s cubic-bezier(.16,1,.3,1)}
-.lp .fa-brands{font-size:1rem;color:var(--t2);transition:color .2s}
-.lp:hover{border-color:var(--p);color:var(--p);background:var(--p-dim);transform:translateY(-2px);box-shadow:0 6px 20px var(--p-glow)}
-.lp:hover .fa-brands{color:#fff}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-footer{background:var(--bg2);border-top:1px solid var(--border);padding:58px 0 42px;position:relative;overflow:hidden}
-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--p),var(--a),var(--rs),transparent)}
-.fi{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:28px}
-.fl2{font-family:var(--ff-mono);font-weight:800;font-size:1rem;color:var(--p);margin-bottom:6px}
-.fl2 span{color:var(--a)}
-.fc{font-size:.74rem;color:var(--t3);line-height:1.7}
-.fc a{color:var(--p-lt);transition:color .2s}
-.fc a:hover{color:var(--p)}
-.fso{display:flex;gap:9px}
-.fsb{width:44px;height:44px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rsm);font-size:1.15rem;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.16,1,.3,1)}
-.fsb.gh{color:#e6edf3}
-.fsb.li{color:#0a66c2}
-.fsb.yt{color:#ff0033}
-.fsb.ig{color:var(--rs)}
-.fsb:hover{transform:translateY(-4px) scale(1.08);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.fsb.gh:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);color:#fff}
-.fsb.li:hover{background:rgba(10,102,194,.12);border-color:rgba(10,102,194,.3);color:#0a66c2}
-.fsb.yt:hover{background:rgba(255,0,51,.08);border-color:rgba(255,0,51,.3);color:#ff0033}
-.fsb.ig:hover{background:var(--rs-dim);border-color:rgba(240,98,146,.3);color:var(--rs)}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media(max-width:1024px){
-  .skl{grid-template-columns:repeat(2,1fr)}
-  .skl .skc:nth-child(1){grid-row:span 1}
-}
-@media(max-width:900px){
-  .hc{grid-template-columns:1fr}
-  .hr{margin-top:48px}
-  .fb1,.fb2,.fb3{display:none}
-  nav ul{display:none}
-  .hbg{display:flex}
-  .pg{grid-template-columns:1fr}
-}
-@media(max-width:640px){
-  .hname,.hbadge,.hrole,.hdesc{text-align:center}
-  .hbtns{justify-content:center}
-  html[dir="rtl"] .hname{text-align:center}
-  .ag{grid-template-columns:1fr}
-  .fi{flex-direction:column;align-items:flex-start}
-  html[dir="rtl"] .fi{align-items:flex-end}
-  .skl{grid-template-columns:1fr}
-}
-
-/* Large text accessibility mode */
-body.lg-txt{font-size:19px!important}
-body.lg-txt .hname{font-size:clamp(3rem,6vw,5rem)}
-body.lg-txt .st{font-size:clamp(2.2rem,4.5vw,3.6rem)}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Readex+Pro:wght@300;400;500;600&family=Unbounded:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="top">
 
-<div id="spb" aria-hidden="true"></div>
-<div id="cg" aria-hidden="true"></div>
-<div class="noise" aria-hidden="true"></div>
-<canvas id="pc" aria-hidden="true"></canvas>
-<div class="orb-wrap" aria-hidden="true"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
-<div class="grid-bg" aria-hidden="true"></div>
-
-<!-- ================================================================ NAVBAR -->
-<header id="nav" role="banner">
-  <div class="ni">
-    <a href="#hero" class="nl" aria-label="Danya Musbah — Home">
-      <div class="nm" aria-hidden="true">DM</div>
-      <span class="nl-txt">danya<span>.dev</span></span>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="#top" id="brand" aria-label="الصفحة الرئيسية">
+      <span class="brand-mark">DM</span><span class="brand-year">2050</span>
     </a>
-    <nav aria-label="Primary navigation">
-      <ul role="list">
-        <li><a href="#about" class="nav-link" data-en="About" data-ar="من أنا">About</a></li>
-        <li><a href="#skills" class="nav-link" data-en="Skills" data-ar="المهارات">Skills</a></li>
-        <li><a href="#projects" class="nav-link" data-en="Projects" data-ar="المشاريع">Projects</a></li>
-        <li><a href="#contact" class="nav-link" data-en="Contact" data-ar="التواصل">Contact</a></li>
-      </ul>
+    <nav class="nav" id="nav" aria-label="التنقل">
+      <a href="#about" data-i18n="nav_about">نبذة</a>
+      <a href="#work" data-i18n="nav_work">المشاريع</a>
+      <a href="#background" data-i18n="nav_bg">المسار</a>
+      <a href="#stack" data-i18n="nav_stack">المهارات</a>
+      <a href="#contact" data-i18n="nav_contact">التواصل</a>
     </nav>
-    <div class="na">
-      <button class="ib lbtn" id="langBtn" aria-label="Switch to Arabic">AR</button>
-      <button class="ib" id="themeBtn" aria-label="Toggle light/dark theme">
-        <i class="fa-solid fa-moon" id="themeIc"></i>
-      </button>
-      <button class="ib" id="sizeBtn" aria-label="Toggle large text mode" title="Accessibility: larger text">
-        <i class="fa-solid fa-universal-access"></i>
-      </button>
-      <button class="ib hbg" id="hbg" aria-label="Open navigation menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+    <div class="tools">
+      <button class="tool" id="lang" type="button" aria-label="Switch to English">EN</button>
+      <button class="tool tool-theme" id="theme" type="button" aria-label="تبديل المظهر"><span class="theme-glyph" aria-hidden="true"></span></button>
     </div>
   </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 </header>
 
-<nav class="mnav" id="mnav" aria-label="Mobile navigation" aria-hidden="true">
-  <a href="#about" class="nav-link" data-en="About" data-ar="من أنا"><i class="fa-solid fa-user" style="color:var(--p)"></i>About</a>
-  <a href="#skills" class="nav-link" data-en="Skills" data-ar="المهارات"><i class="fa-solid fa-code" style="color:var(--a)"></i>Skills</a>
-  <a href="#projects" class="nav-link" data-en="Projects" data-ar="المشاريع"><i class="fa-solid fa-folder-open" style="color:var(--ok)"></i>Projects</a>
-  <a href="#contact" class="nav-link" data-en="Contact" data-ar="التواصل"><i class="fa-solid fa-envelope" style="color:var(--rs)"></i>Contact</a>
-</nav>
+<main class="wrap">
 
-<!-- ================================================================ HERO -->
-<main>
-<section id="hero" aria-labelledby="htit">
-  <div class="wrap">
-    <div class="hc">
-      <div class="hl">
-        <div class="hbadge">
-          <div class="bdot" aria-hidden="true"></div>
-          <span data-en="Available for Opportunities" data-ar="متاحة للفرص المهنية">Available for Opportunities</span>
-        </div>
-        <h1 id="htit" class="hname">
-          <span class="hn1" data-en="Danya Musbah" data-ar="دانية مصباح">Danya Musbah</span>
-          <span class="hn2" data-en="Software Engineer" data-ar="مهندسة برمجيات">Software Engineer<span class="tcursor" aria-hidden="true"></span></span>
-        </h1>
-        <p class="hrole" data-en="// Full-Stack Developer · Backend · AI Integrations" data-ar="// مطوّرة متكاملة · خلفية · تكامل ذكاء اصطناعي">// Full-Stack Developer · Backend · AI Integrations</p>
-        <p class="hdesc" data-en="Passionate engineer from Libya with a BSc. in Software Engineering (GPA 92.8%). I build scalable web platforms, real-time systems, and AI-powered applications." data-ar="مهندسة شغوفة من ليبيا، بكالوريوس هندسة برمجيات بمعدل 92.8%. أبني منصات ويب قابلة للتوسع وأنظمة فورية وتطبيقات مدعومة بالذكاء الاصطناعي.">Passionate engineer from Libya with a BSc. in Software Engineering (GPA 92.8%). I build scalable web platforms, real-time systems, and AI-powered applications.</p>
-        <div class="hbtns">
-          <a href="#projects" class="btn btn-p">
-            <i class="fa-solid fa-rocket" aria-hidden="true"></i>
-            <span data-en="View My Work" data-ar="استعرض أعمالي">View My Work</span>
-          </a>
-          <a href="#contact" class="btn btn-g">
-            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-            <span data-en="Get in Touch" data-ar="تواصل معي">Get in Touch</span>
-          </a>
-        </div>
+  <section class="hero" aria-labelledby="name">
+    <div class="hero-text">
+      <p class="eyebrow"><span class="pulse" aria-hidden="true"></span><span data-i18n="eyebrow">ملف أعمال · الإصدار 2050</span></p>
+      <h1 class="name" id="name" lang="en" dir="ltr"><span>Danya</span><span>Musbah</span></h1>
+      <p class="tagline" data-i18n="tagline">برمجيات مبنية على ظروف ليبيا الحقيقية.</p>
+      <p class="sub" data-i18n="sub"></p>
+      <div class="cta">
+        <a class="btn btn-sun" href="#work" data-i18n="cta_work">استعرض المشاريع</a>
+        <a class="btn btn-line" id="cta-github" href="https://github.com/danya-musbah" target="_blank" rel="noopener">GitHub</a>
+        <details class="cvmenu" id="cvmenu">
+          <summary class="btn btn-line"><span data-i18n="cv_btn">تحميل السيرة الذاتية</span></summary>
+          <ul class="cvlist" id="cvlist"></ul>
+        </details>
       </div>
-      <div class="hr">
-        <div class="hcard" id="heroCard">
-          <div class="hcard-inner">
-            <div class="av" aria-hidden="true">DM</div>
-            <p class="cn" data-en="Danya Mahmoud Saleh Musbah" data-ar="دانية محمود صالح مصباح">Danya Mahmoud Saleh Musbah</p>
-            <p class="cr" data-en="// Software Engineer" data-ar="// مهندسة برمجيات">// Software Engineer</p>
-            <div class="ckpis" role="list" aria-label="Key metrics">
-              <div class="kpi" role="listitem"><div class="kv" data-count="92.8">0</div><div class="kl" data-en="GPA Score" data-ar="المعدل العام">GPA Score</div></div>
-              <div class="kpi" role="listitem"><div class="kv" data-count="94">0</div><div class="kl" data-en="Thesis Score" data-ar="تقدير التخرج">Thesis Score</div></div>
-              <div class="kpi" role="listitem"><div class="kv" data-count="4">0</div><div class="kl" data-en="Projects" data-ar="مشاريع">Projects</div></div>
-              <div class="kpi" role="listitem"><div class="kv" data-count="20">0</div><div class="kl" data-en="Technologies" data-ar="تقنية">Technologies</div></div>
-            </div>
-            <div class="cloc">
-              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-              <span data-en="Tripoli, Libya" data-ar="طرابلس، ليبيا">Tripoli, Libya</span>
-            </div>
-          </div>
-        </div>
-        <div class="fb fb1" aria-hidden="true"><i class="fa-solid fa-award"></i><span data-en="BSc. Info Tech" data-ar="بكالوريوس تقنية">BSc. Info Tech</span></div>
-        <div class="fb fb2" aria-hidden="true"><i class="fa-solid fa-bolt"></i><span>Node.js · WebRTC</span></div>
-        <div class="fb fb3" aria-hidden="true"><i class="fa-solid fa-star"></i><span>Junto — 94%</span></div>
-      </div>
+      <p class="coords" dir="ltr"><span id="clock-label">Tripoli</span> · 32.89°N 13.19°E · <time id="clock">--:--:--</time></p>
     </div>
-  </div>
-</section>
 
-<!-- ================================================================ ABOUT -->
-<section id="about" aria-labelledby="abtit">
-  <div class="wave-div" aria-hidden="true"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z"/></svg></div>
-  <div class="wrap">
-    <div class="rv">
-      <div class="ey" data-en="Who I Am" data-ar="من أنا">Who I Am</div>
-      <h2 id="abtit" class="st" data-en="About Me" data-ar="نبذة عني">About Me</h2>
-      <div class="und" aria-hidden="true"></div>
-    </div>
-    <div class="ag">
-      <div class="at">
-        <div class="rv d1">
-          <p data-en="I'm <strong>Danya Mahmoud Saleh Musbah</strong>, a Software Engineering graduate from the University of Tripoli's Faculty of Information Technology. I graduated with a <span class='hl'>GPA of 92.8%</span> and my thesis project <strong>Junto</strong> earned a <span class='hl'>score of 94%</span>." data-ar="أنا <strong>دانية محمود صالح مصباح</strong>، خريجة هندسة برمجيات من كلية تقنية المعلومات بجامعة طرابلس. تخرجت بمعدل <span class='hl'>92.8%</span>، وحصل مشروع تخرجي <strong>جونتو</strong> على <span class='hl'>تقدير 94%</span>.">I'm <strong>Danya Mahmoud Saleh Musbah</strong>, a Software Engineering graduate from the University of Tripoli's Faculty of Information Technology. I graduated with a <span class="hl">GPA of 92.8%</span> and my thesis project <strong>Junto</strong> earned a <span class="hl">score of 94%</span>.</p>
-          <p data-en="My flagship project <strong>Junto</strong> is a real-time smart virtual collaboration platform — built entirely solo — featuring WebRTC video/audio, Socket.io messaging, AI-powered meeting summaries, live multilingual translation, STT/TTS, RAG-based smart chatbot, workspace management, Google Calendar integration, and a full admin dashboard." data-ar="مشروعي الرئيسي <strong>جونتو</strong> هو منصة تعاون افتراضي ذكية في الوقت الفعلي — بنيتها بمفردي — تتضمن: فيديو/صوت WebRTC، مراسلة Socket.io، ملخصات اجتماعات بالذكاء الاصطناعي، ترجمة فورية متعددة اللغات، تحويل الكلام لنص، شات بوت ذكي RAG، إدارة مساحات العمل، تكامل Google Calendar، ولوحة إدارة كاملة.">My flagship project <strong>Junto</strong> is a real-time smart virtual collaboration platform — built entirely solo — featuring WebRTC video/audio, Socket.io messaging, AI-powered meeting summaries, live multilingual translation, STT/TTS, RAG-based smart chatbot, workspace management, Google Calendar integration, and a full admin dashboard.</p>
-          <p data-en="I'm a <strong>fast learner</strong>, highly <strong>committed</strong>, with strong resilience. Seeking my first professional role to apply these skills and grow within a team." data-ar="أتميز بـ<strong>سرعة التعلم</strong> و<strong>الالتزام العالي</strong> وقدرة كبيرة على التحمل. أبحث عن أولى فرصي المهنية لتطبيق هذه المهارات والنمو ضمن فريق.">I'm a <strong>fast learner</strong>, highly <strong>committed</strong>, with strong resilience. Seeking my first professional role to apply these skills and grow within a team.</p>
-        </div>
-        <div class="ec rv d2">
-          <div class="eh">
-            <div class="eic" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></div>
-            <div>
-              <div class="ein" data-en="University of Tripoli · Faculty of Information Technology" data-ar="جامعة طرابلس · كلية تقنية المعلومات">University of Tripoli · Faculty of Information Technology</div>
-              <div class="edg" data-en="Bachelor of Information Technology" data-ar="بكالوريوس تقنية المعلومات">Bachelor of Information Technology</div>
-              <div class="edf" data-en="Software Engineering Department" data-ar="قسم هندسة البرمجيات">Software Engineering Department</div>
-            </div>
-          </div>
-          <div class="gr">
-            <span class="gc gb"><i class="fa-solid fa-chart-line"></i>GPA: 92.8%</span>
-            <span class="gc ga"><i class="fa-solid fa-star"></i><span data-en="Thesis: Junto — 94%" data-ar="مشروع التخرج: جونتو — 94%">Thesis: Junto — 94%</span></span>
-          </div>
-        </div>
-        <div class="sg rv d3" id="contact" aria-label="Social profiles">
-          <a href="https://github.com/danya-musbah" target="_blank" rel="noopener" class="sp github" aria-label="GitHub"><i class="fa-brands fa-github"></i>GitHub</a>
-          <a href="https://linkedin.com/in/danya-musbah-87098838b/" target="_blank" rel="noopener" class="sp linkedin" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
-          <a href="https://www.youtube.com/@danya-musbah" target="_blank" rel="noopener" class="sp youtube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i>YouTube</a>
-          <a href="https://instagram.com/danya_musbah" target="_blank" rel="noopener" class="sp instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i>Instagram</a>
-        </div>
-      </div>
-      <div>
-        <div class="as rv d2" aria-label="Profile highlights">
-          <div class="si">
-            <div class="sib sb" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></div>
-            <div><div class="sv" data-count="92.8" data-suffix="%">0%</div><div class="sd" data-en="Overall GPA — University of Tripoli" data-ar="المعدل العام — جامعة طرابلس">Overall GPA — University of Tripoli</div></div>
-          </div>
-          <div class="si">
-            <div class="sib sam" aria-hidden="true"><i class="fa-solid fa-star"></i></div>
-            <div><div class="sv" data-count="94" data-suffix="%">0%</div><div class="sd" data-en="Thesis: Project Junto (built solo)" data-ar="مشروع التخرج جونتو (منفردة)">Thesis: Project Junto (built solo)</div></div>
-          </div>
-          <div class="si">
-            <div class="sib sg2" aria-hidden="true"><i class="fa-solid fa-folder-open"></i></div>
-            <div><div class="sv" data-count="4" data-suffix="+">0+</div><div class="sd" data-en="Completed projects (solo & team)" data-ar="مشاريع مكتملة (فردية وجماعية)">Completed projects (solo & team)</div></div>
-          </div>
-          <div class="si">
-            <div class="sib sr" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></div>
-            <div><div class="sv" data-count="20" data-suffix="+">0+</div><div class="sd" data-en="Technologies & frameworks mastered" data-ar="تقنيات وأطر عمل متقنة">Technologies & frameworks mastered</div></div>
-          </div>
-        </div>
-        <div class="cs rv d3" aria-label="Contact information">
-          <div class="cr2"><div class="ci" aria-hidden="true"><i class="fa-solid fa-envelope"></i></div><a href="mailto:danyamusbah8@gmail.com">danyamusbah8@gmail.com</a></div>
-          <div class="cr2"><div class="ci" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></div><span data-en="Tripoli, Libya" data-ar="طرابلس، ليبيا">Tripoli, Libya</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <figure class="orbit-box">
+      <canvas id="orbit" class="orbit" role="img" aria-label="مخطط مداري تفاعلي للمشاريع. القائمة الكاملة في قسم المشاريع."></canvas>
+      <figcaption class="orbit-hud">
+        <span class="orbit-name" id="orbit-name" data-i18n="orbit_hint">مرّر على مشروع أو اضغط عليه</span>
+        <ul class="legend" aria-hidden="true">
+          <li><i class="dot dot-ai"></i><span data-i18n="cat_ai">ذكاء اصطناعي</span></li>
+          <li><i class="dot dot-data"></i><span data-i18n="cat_data">بيانات وتحليل</span></li>
+          <li><i class="dot dot-platform"></i><span data-i18n="cat_platform">منصات</span></li>
+          <li><i class="dot dot-tool"></i><span data-i18n="cat_tool">أدوات</span></li>
+        </ul>
+      </figcaption>
+    </figure>
+  </section>
 
-<!-- ================================================================ SKILLS -->
-<section id="skills" aria-labelledby="sktit">
-  <div class="wave-div" aria-hidden="true"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,0 C480,60 960,0 1440,60 L1440,60 L0,60 Z"/></svg></div>
-  <div class="wrap">
-    <div class="rv">
-      <div class="ey" data-en="Technical Expertise" data-ar="الخبرة التقنية">Technical Expertise</div>
-      <h2 id="sktit" class="st" data-en="Skills & Technologies" data-ar="المهارات والتقنيات">Skills & Technologies</h2>
-      <div class="und" aria-hidden="true"></div>
-      <p class="ssub" data-en="Built through academic projects, self-directed learning, and real-world problem solving across the full stack." data-ar="تكوّنت عبر المشاريع الأكاديمية والتعلم الذاتي وحل المشكلات الحقيقية على المنظومة الكاملة.">Built through academic projects, self-directed learning, and real-world problem solving across the full stack.</p>
-    </div>
-    <div class="skl">
-      <div class="skc sfe rv d1">
-        <div class="skh"><div class="ski ife" aria-hidden="true"><i class="fa-solid fa-globe"></i></div><div class="skn" data-en="Frontend" data-ar="الواجهة الأمامية">Frontend</div></div>
-        <div class="tc"><span class="skt">HTML5</span><span class="skt">CSS3</span><span class="skt">JavaScript</span><span class="skt">EJS</span><span class="skt">Blade</span><span class="skt">DOM</span><span class="skt">AJAX</span><span class="skt">Figma</span></div>
-      </div>
-      <div class="skc sbe rv d2">
-        <div class="skh"><div class="ski ibe" aria-hidden="true"><i class="fa-solid fa-terminal"></i></div><div class="skn" data-en="Backend" data-ar="الواجهة الخلفية">Backend</div></div>
-        <div class="tc"><span class="skt">Node.js</span><span class="skt">Express.js</span><span class="skt">PHP</span><span class="skt">Laravel</span><span class="skt">Django</span><span class="skt">Java</span><span class="skt">JavaFX</span><span class="skt">Python</span><span class="skt">C</span><span class="skt">C#</span><span class="skt">Prolog</span><span class="skt">Unity</span></div>
-      </div>
-      <div class="skc sdb rv d3">
-        <div class="skh"><div class="ski idb" aria-hidden="true"><i class="fa-solid fa-database"></i></div><div class="skn" data-en="Databases" data-ar="قواعد البيانات">Databases</div></div>
-        <div class="tc"><span class="skt">SQL</span><span class="skt">MySQL</span><span class="skt">PostgreSQL</span><span class="skt">Supabase</span><span class="skt">MS SQL Server</span><span class="skt">DB Schema</span></div>
-      </div>
-      <div class="skc sse rv d4">
-        <div class="skh"><div class="ski ise" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div><div class="skn" data-en="Security & Auth" data-ar="الأمان والمصادقة">Security & Auth</div></div>
-        <div class="tc"><span class="skt">JWT</span><span class="skt">OAuth</span><span class="skt">SQL Injection</span><span class="skt">Auth &amp; Authz</span><span class="skt">API Security</span><span class="skt">Sessions</span><span class="skt">Cookies</span></div>
-      </div>
-      <div class="skc sat rv d5">
-        <div class="skh"><div class="ski iat" aria-hidden="true"><i class="fa-solid fa-arrows-left-right"></i></div><div class="skn" data-en="APIs & Realtime" data-ar="الواجهات والوقت الفعلي">APIs & Realtime</div></div>
-        <div class="tc"><span class="skt">REST APIs</span><span class="skt">API Integration</span><span class="skt">WebRTC</span><span class="skt">Socket.io</span><span class="skt">OOP</span><span class="skt">CupCat</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+  <section class="stats rv" aria-label="Key numbers">
+    <div class="stat"><b class="num" data-to="92.78" data-dec="2" data-suf="%">92.78%</b><span data-i18n="st_grade">المعدل العام، تقدير ممتاز</span></div>
+    <div class="stat"><b class="num" data-to="100">100</b><span data-i18n="st_db">درجة مقرري قواعد البيانات (كلٌّ من 100)</span></div>
+    <div class="stat"><b class="num" data-to="88">88</b><span data-i18n="st_tables">جدولاً في قاعدة بيانات Junto</span></div>
+    <div class="stat"><b class="num" data-to="102">102</b><span data-i18n="st_req">متطلباً وظيفياً موثّقاً في Junto</span></div>
+  </section>
 
-<!-- ================================================================ PROJECTS -->
-<section id="projects" aria-labelledby="pjtit">
-  <div class="wave-div" aria-hidden="true"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,60 C360,0 1080,60 1440,0 L1440,60 L0,60 Z"/></svg></div>
-  <div class="wrap">
-    <div class="rv">
-      <div class="ey" data-en="What I've Built" data-ar="ما بنيته">What I've Built</div>
-      <h2 id="pjtit" class="st" data-en="Projects" data-ar="المشاريع">Projects</h2>
-      <div class="und" aria-hidden="true"></div>
-      <p class="ssub" data-en="Selected work spanning full-stack development, real-time systems, and team collaboration — each project a step forward in engineering maturity." data-ar="أعمال مختارة تمتد عبر التطوير الكامل وأنظمة الوقت الفعلي والعمل الجماعي — كل مشروع خطوة نحو النضج الهندسي.">Selected work spanning full-stack development, real-time systems, and team collaboration — each project a step forward in engineering maturity.</p>
+  <section class="sec" id="about" aria-labelledby="about-h">
+    <div class="sec-head rv"><h2 id="about-h" data-i18n="about_title">نبذة</h2></div>
+    <div class="about rv">
+      <p class="about-p" id="about-p"></p>
+      <dl class="facts" id="facts"></dl>
     </div>
-    <div class="pg">
-      <div class="pc pf rv d1">
-        <div class="pb">
-          <div class="pm"><span class="pn2">// 04</span><span class="pbdg pbst"><i class="fa-solid fa-star"></i><span data-en="Thesis · Solo" data-ar="تخرج · منفردة">Thesis · Solo</span></span></div>
-          <h3 class="ptit">Junto</h3>
-          <p class="psub" data-en="Real-Time Smart Virtual Collaboration" data-ar="منصة تعاون افتراضي ذكية في الوقت الفعلي">Real-Time Smart Virtual Collaboration</p>
-          <p class="pdsc" data-en="A fully integrated web collaboration platform built entirely solo — WebRTC video/audio, Socket.io messaging, AI meeting summaries (Gemini), live translation, STT/TTS, RAG chatbot, workspace management, Google Calendar sync, collaborative whiteboard, and full admin dashboard. Thesis score: 94%." data-ar="منصة ويب تعاونية متكاملة بنيتها بمفردي — فيديو/صوت WebRTC، مراسلة Socket.io، ملخصات AI (Gemini)، ترجمة فورية، تحويل صوت/نص، شات بوت RAG، إدارة مساحات العمل، مزامنة Google Calendar، لوحة بيضاء، ولوحة إدارة كاملة. تقدير مشروع التخرج: 94%.">A fully integrated web collaboration platform built entirely solo — WebRTC video/audio, Socket.io messaging, AI meeting summaries (Gemini), live translation, STT/TTS, RAG chatbot, workspace management, Google Calendar sync, collaborative whiteboard, and full admin dashboard. Thesis score: 94%.</p>
-        </div>
-        <div class="pft">
-          <div class="chips"><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">WebRTC</span><span class="chip">Socket.io</span><span class="chip">PostgreSQL</span><span class="chip">Gemini AI</span><span class="chip">EJS</span><span class="chip">JWT</span></div>
-          <div class="pls"><a href="https://github.com/2212857194/Junto" target="_blank" rel="noopener" class="lp" aria-label="View Junto on GitHub"><i class="fa-brands fa-github"></i><span data-en="GitHub" data-ar="قيت هب">GitHub</span></a></div>
-        </div>
-      </div>
-      <div class="pc rv d2">
-        <div class="pb">
-          <div class="pm"><span class="pn2">// 03</span><span class="pbdg pbtm"><i class="fa-solid fa-users"></i><span data-en="Team of 6" data-ar="فريق 6">Team of 6</span></span></div>
-          <h3 class="ptit">ElectroHub</h3>
-          <p class="psub" data-en="Real-Time E-Commerce Platform" data-ar="متجر إلكتروني في الوقت الفعلي">Real-Time E-Commerce Platform</p>
-          <p class="pdsc" data-en="Full-featured electronics e-commerce with product catalog, cart, user auth, admin panel, and real-time order management. Built with Laravel & MySQL in a 6-person team." data-ar="متجر إلكتروني متكامل للمنتجات الإلكترونية مع كتالوج، سلة، مصادقة، لوحة إدارة، وإدارة طلبات في الوقت الفعلي. بُني بـ Laravel وMySQL ضمن فريق 6.">Full-featured electronics e-commerce with product catalog, cart, user auth, admin panel, and real-time order management. Built with Laravel & MySQL in a 6-person team.</p>
-        </div>
-        <div class="pft">
-          <div class="chips"><span class="chip">Laravel</span><span class="chip">PHP</span><span class="chip">MySQL</span><span class="chip">Blade</span><span class="chip">JS</span></div>
-          <div class="pls"><a href="https://github.com/ituotse/itse408-project-4" target="_blank" rel="noopener" class="lp" aria-label="View ElectroHub on GitHub"><i class="fa-brands fa-github"></i>GitHub</a></div>
-        </div>
-      </div>
-      <div class="pc rv d3">
-        <div class="pb">
-          <div class="pm"><span class="pn2">// 02</span><span class="pbdg pbtm"><i class="fa-solid fa-users"></i><span data-en="Team of 4" data-ar="فريق 4">Team of 4</span></span></div>
-          <h3 class="ptit">Wonder Libya</h3>
-          <p class="psub" data-en="Tourism & Travel Platform" data-ar="منصة السياحة والسفر">Tourism & Travel Platform</p>
-          <p class="pdsc" data-en="Libya tourism discovery site with categorized destinations, user ratings & reviews, search, trip booking, admin panel, and travel blog. PHP + AJAX + MySQL." data-ar="موقع اكتشاف سياحي لليبيا مع وجهات مصنفة، تقييمات، بحث، حجز رحلات، لوحة إدارة، ومدونة سفر. PHP + AJAX + MySQL.">Libya tourism discovery site with categorized destinations, user ratings & reviews, search, trip booking, admin panel, and travel blog. PHP + AJAX + MySQL.</p>
-        </div>
-        <div class="pft">
-          <div class="chips"><span class="chip">PHP</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">AJAX</span><span class="chip">MySQL</span></div>
-          <div class="pls"><a href="https://github.com/2211858249/archiITSE411" target="_blank" rel="noopener" class="lp" aria-label="View Wonder Libya on GitHub"><i class="fa-brands fa-github"></i>GitHub</a></div>
-        </div>
-      </div>
-      <div class="pc rv d4">
-        <div class="pb">
-          <div class="pm"><span class="pn2">// 01</span><span class="pbdg pbtm"><i class="fa-solid fa-users"></i><span data-en="Team of 3" data-ar="فريق 3">Team of 3</span></span></div>
-          <h3 class="ptit" data-en="Java Bike Store" data-ar="متجر دراجات جافا">Java Bike Store</h3>
-          <p class="psub" data-en="Desktop Inventory Management System" data-ar="نظام إدارة مخزون مكتبي">Desktop Inventory Management System</p>
-          <p class="pdsc" data-en="Desktop bike store system in Java + SQL Server with product catalog, inventory tracking, orders, and sales reports via a JavaFX GUI. Team of 3." data-ar="نظام إدارة متجر دراجات مكتبي بـ Java وSQL Server مع كتالوج، مخزون، طلبات، وتقارير مبيعات بواجهة JavaFX. فريق 3 أشخاص.">Desktop bike store system in Java + SQL Server with product catalog, inventory tracking, orders, and sales reports via a JavaFX GUI. Team of 3.</p>
-        </div>
-        <div class="pft">
-          <div class="chips"><span class="chip">Java</span><span class="chip">JavaFX</span><span class="chip">SQL Server</span><span class="chip">JDBC</span></div>
-        </div>
-      </div>
+  </section>
+
+  <section class="sec" id="work" aria-labelledby="work-h">
+    <div class="sec-head rv">
+      <h2 id="work-h" data-i18n="work_title">المشاريع</h2>
+      <span class="count" id="work-count"></span>
     </div>
-  </div>
-</section>
+    <p class="lede rv" data-i18n="work_intro"></p>
+    <div class="toolbar rv">
+      <div class="filters" id="filters" role="group" aria-label="تصنيف"></div>
+      <button class="clear" id="clear" type="button" hidden></button>
+    </div>
+    <h3 class="grp rv" id="grp-feat" data-i18n="grp_feat"></h3>
+    <div class="grid grid-2" id="project-feat"></div>
+    <h3 class="grp rv" id="grp-more" data-i18n="grp_more"></h3>
+    <div class="grid" id="project-list"></div>
+    <a class="allrepos rv" id="allrepos" href="https://github.com/danya-musbah?tab=repositories" target="_blank" rel="noopener"><span data-i18n="all_repos"></span><b aria-hidden="true">↗</b></a>
+  </section>
+
+  <section class="sec" id="archive" aria-labelledby="archive-h">
+    <div class="sec-head rv"><h2 id="archive-h" data-i18n="archive_title">الأرشيف</h2></div>
+    <ul class="arch rv" id="archive-list"></ul>
+  </section>
+
+  <section class="sec" id="background" aria-labelledby="edu-h">
+    <div class="sec-head rv"><h2 id="edu-h" data-i18n="journey_title">المسار</h2></div>
+    <ol class="journey" id="journey"></ol>
+    <div class="sec-head sub-head rv"><h2 data-i18n="edu_title">التعليم والتكريم</h2></div>
+    <div class="grid grid-2 grid-s" id="edu-list"></div>
+    <div class="sec-head sub-head rv"><h2 id="exp-h" data-i18n="exp_title">الخبرة</h2></div>
+    <div class="grid grid-2 grid-s" id="exp-list"></div>
+  </section>
+
+  <section class="sec" id="stack" aria-labelledby="stack-h">
+    <div class="sec-head rv"><h2 id="stack-h" data-i18n="skills_title">المهارات</h2></div>
+    <p class="lede rv" data-i18n="skills_intro"></p>
+    <div class="toolbar rv"><div class="filters" id="lvl-filters" role="group" aria-label="Level"></div></div>
+    <ul class="legend lv-legend rv" id="lvl-legend"></ul>
+    <div class="sk-grid" id="skill-groups"></div>
+
+    <div class="sec-head sub-head rv"><h2 data-i18n="stack_title">التقنيات في المشاريع</h2></div>
+    <p class="lede rv" data-i18n="stack_intro"></p>
+    <div class="chips rv" id="stack-chips"></div>
+  </section>
+
+  <section class="sec" id="evidence" aria-labelledby="ev-h">
+    <div class="sec-head rv"><h2 id="ev-h" data-i18n="ev_title">الأدلة</h2></div>
+    <p class="lede rv" data-i18n="ev_intro"></p>
+    <ul class="ev rv" id="ev-list"></ul>
+  </section>
+
+  <section class="sec" id="contact" aria-labelledby="contact-h">
+    <div class="sec-head rv"><h2 id="contact-h" data-i18n="contact_title">التواصل</h2></div>
+    <p class="lede rv" data-i18n="contact_p"></p>
+    <div class="contact rv" id="contact-links"></div>
+  </section>
+
 </main>
 
-<!-- ================================================================ FOOTER -->
-<footer role="contentinfo">
-  <div class="wrap">
-    <div class="fi">
-      <div>
-        <div class="fl2">danya<span>.dev</span></div>
-        <div class="fc">
-          <span data-en="Danya Mahmoud Saleh Musbah · Tripoli, Libya" data-ar="دانية محمود صالح مصباح · طرابلس، ليبيا">Danya Mahmoud Saleh Musbah · Tripoli, Libya</span>
-          <br><a href="mailto:danyamusbah8@gmail.com">danyamusbah8@gmail.com</a>
-        </div>
-      </div>
-      <div class="fso" aria-label="Social links">
-        <a href="https://github.com/danya-musbah" target="_blank" rel="noopener" class="fsb gh" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a href="https://linkedin.com/in/danya-musbah-87098838b/" target="_blank" rel="noopener" class="fsb li" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="https://www.youtube.com/@danya-musbah" target="_blank" rel="noopener" class="fsb yt" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-        <a href="https://instagram.com/danya_musbah" target="_blank" rel="noopener" class="fsb ig" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-      </div>
-    </div>
-  </div>
+<footer class="foot">
+  <span dir="ltr">© 2026 Danya Musbah</span>
+  <span dir="ltr" class="foot-r">University of Tripoli · SE / IT</span>
 </footer>
 
-<!-- ================================================================ JS -->
-<script>
-/* ---- PARTICLES ---- */
-(()=>{
-  const c=document.getElementById('pc'),ctx=c.getContext('2d');
-  let W,H,pts=[],mx=-999,my=-999;
-  const dark=()=>document.documentElement.getAttribute('data-theme')!=='light';
-  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
-  resize();window.addEventListener('resize',resize);
-  function rnd(a,b){return a+Math.random()*(b-a)}
-  function mk(){return{x:rnd(0,W),y:rnd(0,H),vx:rnd(-.3,.3),vy:rnd(-.3,.3),r:rnd(.6,2.2),al:rnd(.08,.45)}}
-  for(let i=0;i<90;i++)pts.push(mk());
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    const col=dark()?'180,220,210':'20,60,80';
-    pts.forEach(p=>{
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
-      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-      const dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy);
-      if(d<100){p.x+=dx/d*.8;p.y+=dy/d*.8}
-      ctx.beginPath();ctx.arc(p.x,p.y,Math.max(.1,p.r),0,Math.PI*2);
-      ctx.fillStyle=`rgba(${col},${p.al})`;ctx.fill();
-    });
-    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
-      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.hypot(dx,dy);
-      if(d<120){
-        ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
-        ctx.strokeStyle=`rgba(${col},${.1*(1-d/120)})`;ctx.lineWidth=.5;ctx.stroke();
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-})();
-
-/* ---- CURSOR GLOW ---- */
-const cg=document.getElementById('cg');
-let cgX=0,cgY=0,crX=0,crY=0;
-document.addEventListener('mousemove',e=>{cgX=e.clientX;cgY=e.clientY});
-(function animateCursor(){
-  crX+=(cgX-crX)*.08;crY+=(cgY-crY)*.08;
-  cg.style.transform=`translate(${crX}px,${crY}px) translate(-50%,-50%)`;
-  requestAnimationFrame(animateCursor);
-})();
-
-/* ---- 3D CARD TILT ---- */
-const heroCard=document.getElementById('heroCard');
-if(heroCard){
-  heroCard.addEventListener('mousemove',e=>{
-    const r=heroCard.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    heroCard.style.transform=`perspective(800px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-8px)`;
-  });
-  heroCard.addEventListener('mouseleave',()=>{
-    heroCard.style.transform='perspective(800px) rotateY(0) rotateX(0) translateY(0)';
-    heroCard.style.transition='transform .5s cubic-bezier(.16,1,.3,1)';
-  });
-  heroCard.addEventListener('mouseenter',()=>{heroCard.style.transition='none'});
-}
-
-/* ---- SCROLL PROGRESS ---- */
-const spb=document.getElementById('spb');
-window.addEventListener('scroll',()=>{
-  const p=window.scrollY/(document.body.scrollHeight-innerHeight);
-  spb.style.transform=`scaleX(${p})`;
-},{passive:true});
-
-/* ---- NAV SCROLL ---- */
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30),{passive:true});
-
-/* ---- ACTIVE LINKS ---- */
-const links=document.querySelectorAll('.nav-link');
-const sects=['hero','about','skills','projects'].map(id=>document.getElementById(id)).filter(Boolean);
-new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting)links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
-  });
-},{threshold:.3}).observe(...sects);
-
-/* ---- REVEAL ON SCROLL ---- */
-const rvObs=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting)e.target.classList.add('vis');
-}),{threshold:.06,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
-
-/* ---- ANIMATED COUNTERS ---- */
-const counterObs=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting&&!e.target.dataset.counted){
-    e.target.dataset.counted='true';
-    const el=e.target,target=parseFloat(el.dataset.count),suffix=el.dataset.suffix||'';
-    const isFloat=target%1!==0;
-    const dur=1800,start=performance.now();
-    function tick(now){
-      const p=Math.min((now-start)/dur,1);
-      const ease=1-Math.pow(1-p,4);
-      const v=target*ease;
-      el.textContent=(isFloat?v.toFixed(1):Math.round(v))+suffix;
-      if(p<1)requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-}),{threshold:.5});
-document.querySelectorAll('[data-count]').forEach(el=>counterObs.observe(el));
-
-/* ---- THEME TOGGLE ---- */
-const themeBtn=document.getElementById('themeBtn'),thIc=document.getElementById('themeIc');
-let dk=true;
-themeBtn.addEventListener('click',()=>{
-  dk=!dk;
-  document.documentElement.setAttribute('data-theme',dk?'dark':'light');
-  thIc.className=dk?'fa-solid fa-moon':'fa-solid fa-sun';
-  themeBtn.style.transform='rotate(360deg) scale(.9)';
-  setTimeout(()=>themeBtn.style.transform='',400);
-});
-
-/* ---- LANGUAGE TOGGLE ---- */
-const langBtn=document.getElementById('langBtn');
-let ar=false;
-function applyLang(){
-  const dir=ar?'rtl':'ltr',lang=ar?'ar':'en';
-  document.documentElement.setAttribute('dir',dir);
-  document.documentElement.setAttribute('lang',lang);
-  langBtn.textContent=ar?'EN':'AR';
-  langBtn.setAttribute('aria-label',ar?'Switch to English':'Switch to Arabic');
-  document.body.style.fontFamily=ar?
-    "'Noto Sans Arabic','Space Grotesk',sans-serif":
-    "'Space Grotesk','Noto Sans Arabic',sans-serif";
-  document.querySelectorAll('[data-en]').forEach(el=>{
-    const v=el.getAttribute('data-'+lang);
-    if(!v)return;
-    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){el.placeholder=v}
-    else{el.innerHTML=v}
-  });
-  const hn2=document.querySelector('.hn2');
-  if(hn2&&!hn2.querySelector('.tcursor'))
-    hn2.insertAdjacentHTML('beforeend','<span class="tcursor" aria-hidden="true"></span>');
-}
-langBtn.addEventListener('click',()=>{
-  ar=!ar;applyLang();
-  langBtn.style.transform='scale(.85)';setTimeout(()=>langBtn.style.transform='',200);
-});
-
-/* ---- TEXT SIZE TOGGLE ---- */
-const sizeBtn=document.getElementById('sizeBtn');
-let lg=false;
-sizeBtn.addEventListener('click',()=>{
-  lg=!lg;
-  document.body.classList.toggle('lg-txt',lg);
-  sizeBtn.querySelector('i').style.color=lg?'var(--a)':'';
-  sizeBtn.setAttribute('aria-pressed',lg);
-  sizeBtn.style.transform='scale(.85)';setTimeout(()=>sizeBtn.style.transform='',200);
-});
-
-/* ---- HAMBURGER ---- */
-const hbg=document.getElementById('hbg'),mnav=document.getElementById('mnav');
-hbg.addEventListener('click',()=>{
-  const o=mnav.classList.toggle('open');
-  hbg.classList.toggle('open',o);
-  hbg.setAttribute('aria-expanded',o);
-  mnav.setAttribute('aria-hidden',!o);
-});
-mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-  mnav.classList.remove('open');hbg.classList.remove('open');
-  hbg.setAttribute('aria-expanded',false);mnav.setAttribute('aria-hidden',true);
-}));
-
-/* ---- SMOOTH SCROLL ---- */
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
-  const t=document.querySelector(a.getAttribute('href'));
-  if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
-}));
-
-/* ---- MAGNETIC BUTTONS ---- */
-document.querySelectorAll('.btn').forEach(btn=>{
-  btn.addEventListener('mousemove',e=>{
-    const r=btn.getBoundingClientRect();
-    const x=e.clientX-r.left-r.width/2;
-    const y=e.clientY-r.top-r.height/2;
-    btn.style.transform=`translate(${x*.15}px,${y*.15}px) scale(1.02)`;
-  });
-  btn.addEventListener('mouseleave',()=>{
-    btn.style.transform='';btn.style.transition='transform .4s cubic-bezier(.16,1,.3,1)';
-    setTimeout(()=>btn.style.transition='',400);
-  });
-  btn.addEventListener('mouseenter',()=>{btn.style.transition='none'});
-});
-
-/* ---- PARALLAX ORBS ON SCROLL ---- */
-const orbs=document.querySelectorAll('.orb');
-window.addEventListener('scroll',()=>{
-  const s=window.scrollY;
-  orbs[0].style.transform=`translate(${Math.sin(s*.002)*40}px,${s*.05}px)`;
-  orbs[1].style.transform=`translate(${Math.cos(s*.002)*30}px,${-s*.03}px)`;
-  orbs[2].style.transform=`translate(${Math.sin(s*.003)*25}px,${s*.04}px)`;
-},{passive:true});
-
-/* ---- RIPPLE ON CARDS ---- */
-document.querySelectorAll('.skc,.pc,.si').forEach(el=>{
-  el.addEventListener('click',function(e){
-    const r=this.getBoundingClientRect();
-    const ripple=document.createElement('span');
-    ripple.style.cssText=`position:absolute;border-radius:50%;background:rgba(56,189,176,.15);width:200px;height:200px;left:${e.clientX-r.left-100}px;top:${e.clientY-r.top-100}px;transform:scale(0);animation:rippleAnim .6s ease-out forwards;pointer-events:none;z-index:0`;
-    this.style.position=this.style.position||'relative';
-    this.style.overflow='hidden';
-    this.appendChild(ripple);
-    setTimeout(()=>ripple.remove(),600);
-  });
-});
-const rippleStyle=document.createElement('style');
-rippleStyle.textContent='@keyframes rippleAnim{to{transform:scale(2.5);opacity:0}}';
-document.head.appendChild(rippleStyle);
-</script>
+<script src="script.js" defer></script>
 </body>
 </html>
