@@ -26,6 +26,8 @@
       all_repos: 'كل المستودعات على GitHub',
       journey_title: 'المسار',
       b_guided: 'دروس موجّهة مع تعديلاتي',
+      search_ph: 'ابحث في المشاريع أو التقنيات', no_match: 'لا توجد مشاريع مطابقة. جرّب كلمة أخرى.', menu_label: 'القائمة', totop: 'إلى الأعلى',
+      roles: ['مهندسة برمجيات', 'مصمّمة قواعد بيانات', 'بانية تطبيقات ذكاء اصطناعي', 'مطوّرة ويب عربي RTL'],
       brand_label: 'الصفحة الرئيسية',
       nav_about: 'نبذة', nav_work: 'المشاريع', nav_bg: 'المسار', nav_stack: 'المهارات', nav_contact: 'التواصل',
       eyebrow: 'ملف أعمال · الإصدار 2050',
@@ -75,6 +77,8 @@
       all_repos: 'All repositories on GitHub',
       journey_title: 'Journey',
       b_guided: 'Guided, with my own changes',
+      search_ph: 'Search projects or technologies', no_match: 'No matching projects. Try another word.', menu_label: 'Menu', totop: 'Back to top',
+      roles: ['Software Engineer', 'Database Designer', 'AI Application Builder', 'Arabic RTL Web Developer'],
       brand_label: 'Home',
       nav_about: 'About', nav_work: 'Work', nav_bg: 'Background', nav_stack: 'Skills', nav_contact: 'Contact',
       eyebrow: 'Portfolio · Edition 2050',
@@ -405,7 +409,7 @@
   /* ------------------------------------------------------------------
      State and small helpers
      ------------------------------------------------------------------ */
-  var state = { lang: 'ar', cat: 'all', tech: null, lvl: 'all' };
+  var state = { lang: 'ar', cat: 'all', tech: null, lvl: 'all', q: '' };
 
   function t(key) { return S[state.lang][key]; }
   function L(o) { return o[state.lang]; }
@@ -417,6 +421,10 @@
   function matches(p) {
     if (state.cat !== 'all' && p.cats.indexOf(state.cat) === -1) return false;
     if (state.tech && p.stack.indexOf(state.tech) === -1) return false;
+    if (state.q) {
+      var hay = (p.name + ' ' + p.type.ar + ' ' + p.type.en + ' ' + p.desc.ar + ' ' + p.desc.en + ' ' + p.stack.join(' ')).toLowerCase();
+      if (hay.indexOf(state.q) === -1) return false;
+    }
     return true;
   }
 
@@ -441,6 +449,10 @@
     $('#lang').textContent = t('lang_btn');
     $('#lang').setAttribute('aria-label', t('lang_aria'));
     $('#theme').setAttribute('aria-label', t('theme_aria'));
+    $('#menu').setAttribute('aria-label', t('menu_label'));
+    $('#totop').setAttribute('aria-label', t('totop'));
+    $('#q').setAttribute('placeholder', t('search_ph'));
+    $('#q-label').textContent = t('search_ph');
     $('#facts').innerHTML = ['uni', 'field', 'grad', 'rank', 'focus', 'lang', 'goal'].map(function (k) {
       return '<div><dt>' + t('f_' + k) + '</dt><dd>' + t('v_' + k) + '</dd></div>';
     }).join('');
@@ -491,6 +503,7 @@
     $('#project-feat').innerHTML = feat.map(projectCard).join('');
     $('#project-list').innerHTML = more.map(projectCard).join('');
     $('#grp-feat').hidden = !feat.length; $('#grp-more').hidden = !more.length;
+    if (!list.length) $('#project-list').innerHTML = '<p class="empty">' + t('no_match') + '</p>';
     var clear = $('#clear');
     clear.hidden = !state.tech;
     if (state.tech) clear.textContent = '✕ ' + fill(t('clear_tech'), { x: state.tech });
@@ -534,7 +547,11 @@
       return '<li><span class="lv">' + l + '</span><span>' + t('lv_' + l) + '</span></li>';
     }).join('');
     $('#skill-groups').innerHTML = SKILLS.map(function (g, i) {
-      return '<div class="sk rv" style="--d:' + i * 0.07 + 's"><h3>' + L(g.g) + '</h3><div class="sk-chips">' + g.items.map(function (it) {
+      var cnt = { A: 0, B: 0, C: 0, D: 0 };
+      g.items.forEach(function (it) { cnt[it[1][0]]++; });
+      var bar = '<div class="dist" aria-hidden="true">' + ['A', 'B', 'C', 'D'].filter(function (k) { return cnt[k]; }).map(function (k) { return '<i class="d-' + k + '" style="flex:' + cnt[k] + '"></i>'; }).join('') + '</div>' +
+        '<div class="dist-cap">' + ['A', 'B', 'C', 'D'].filter(function (k) { return cnt[k]; }).map(function (k) { return k + ' ' + cnt[k]; }).join(' · ') + '</div>';
+      return '<div class="sk rv" style="--d:' + i * 0.07 + 's"><h3>' + L(g.g) + '</h3>' + bar + '<div class="sk-chips">' + g.items.map(function (it) {
         var dim = state.lvl !== 'all' && it[1].indexOf(state.lvl) === -1;
         return '<span class="sk-chip' + (dim ? ' dim' : '') + '">' + it[0] + '<i>' + it[1] + '</i></span>';
       }).join('') + '</div></div>';
@@ -546,6 +563,8 @@
     var counts = {};
     PROJECTS.forEach(function (p) { p.stack.forEach(function (s) { counts[s] = (counts[s] || 0) + 1; }); });
     var names = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a] || a.localeCompare(b); });
+    var mq = names.map(function (n) { return '<span>' + n + '</span>'; }).join('');
+    $('#marquee').innerHTML = mq + mq;
     $('#stack-chips').innerHTML = names.map(function (n) {
       return '<button class="chip" type="button" dir="ltr" data-tech="' + n + '" aria-pressed="' + (state.tech === n) + '"><span>' + n + '</span><b>' + counts[n] + '</b></button>';
     }).join('');
@@ -723,7 +742,7 @@
     var cv = $('#orbit');
     var ctx = cv.getContext('2d');
     var W = 0, H = 0, hover = -1, running = false, visible = true, last = 0, time = 0, col = {};
-    var TILT = -0.3, FLAT = 0.42;
+    var TILT = -0.3, FLAT = 0.42, tiltT = -0.3, flatT = 0.42;
     var RADII = [0.3, 0.5, 0.7, 0.9];
 
     var nodes = [];
@@ -826,6 +845,7 @@
       if (!running) return;
       var dt = last ? Math.min((now - last) / 1000, 0.1) : 0;
       last = now; time += dt;
+      TILT += (tiltT - TILT) * 0.06; FLAT += (flatT - FLAT) * 0.06;
       draw();
       requestAnimationFrame(frame);
     }
@@ -849,6 +869,12 @@
       if (reduceMotion || !running) draw();
     }
 
+    window.addEventListener('pointermove', function (e) {
+      if (!canHover) return;
+      var r = cv.getBoundingClientRect();
+      tiltT = -0.3 + ((e.clientX - (r.left + r.width / 2)) / window.innerWidth) * 0.3;
+      flatT = 0.42 - ((e.clientY - (r.top + r.height / 2)) / window.innerHeight) * 0.14;
+    }, { passive: true });
     cv.addEventListener('pointermove', function (e) { setHover(hit(e)); });
     cv.addEventListener('pointerdown', function (e) { setHover(hit(e)); });
     cv.addEventListener('pointerleave', function () { setHover(-1); });
@@ -866,6 +892,77 @@
       init: function () { recolor(); resize(); start(); }
     };
   })();
+
+  /* ------------------------------------------------------------------
+     Polish: search, menu, shortcuts, back-to-top, pointer effects, role typewriter
+     ------------------------------------------------------------------ */
+  $('#q').addEventListener('input', function (e) { state.q = e.target.value.trim().toLowerCase(); renderProjects(); });
+  document.addEventListener('keydown', function (e) {
+    var tag = (document.activeElement && document.activeElement.tagName) || '';
+    if (e.key === '/' && !/INPUT|TEXTAREA/.test(tag) && !e.metaKey && !e.ctrlKey) { e.preventDefault(); $('#work').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }); setTimeout(function () { $('#q').focus(); }, reduceMotion ? 0 : 450); }
+    if (e.key === 'Escape') { if (document.activeElement === $('#q')) { $('#q').value = ''; state.q = ''; renderProjects(); $('#q').blur(); } closeMenu(); }
+  });
+
+  function closeMenu() { $('#nav').classList.remove('open'); $('#menu').setAttribute('aria-expanded', 'false'); }
+  $('#menu').addEventListener('click', function () {
+    var open = $('#nav').classList.toggle('open');
+    $('#menu').setAttribute('aria-expanded', String(open));
+  });
+  $('#nav').addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); });
+  document.addEventListener('click', function (e) { if (!e.target.closest('.bar') ) closeMenu(); if (!e.target.closest('#cvmenu')) { var d = $('#cvmenu'); if (d) d.removeAttribute('open'); } });
+
+  var totop = $('#totop');
+  window.addEventListener('scroll', function () {
+    var show = window.scrollY > 900;
+    if (show) totop.hidden = false;
+    totop.classList.toggle('show', show);
+  }, { passive: true });
+  totop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
+
+  if (canHover) {
+    var gl = $('#glow'), gx = 0, gy = 0, gt = 0;
+    window.addEventListener('pointermove', function (e) {
+      gx = e.clientX; gy = e.clientY;
+      if (gt) return;
+      gt = requestAnimationFrame(function () { gt = 0; gl.style.setProperty('--gx', gx + 'px'); gl.style.setProperty('--gy', gy + 'px'); });
+    }, { passive: true });
+    $$('.btn').forEach(function (b) {
+      b.addEventListener('pointermove', function (e) {
+        var r = b.getBoundingClientRect();
+        b.style.setProperty('--tx', ((e.clientX - (r.left + r.width / 2)) * 0.15).toFixed(1) + 'px');
+        b.style.setProperty('--ty', ((e.clientY - (r.top + r.height / 2)) * 0.25).toFixed(1) + 'px');
+      });
+      b.addEventListener('pointerleave', function () { b.style.setProperty('--tx', '0px'); b.style.setProperty('--ty', '0px'); });
+    });
+  }
+
+  /* name: letters rise one by one */
+  $$('#name span').forEach(function (w, wi) {
+    var txt = w.textContent; w.textContent = '';
+    txt.split('').forEach(function (ch, i) {
+      var s = document.createElement('span'); s.className = 'ch'; s.setAttribute('aria-hidden', 'true');
+      s.style.setProperty('--i', String(i + wi * 5)); s.textContent = ch; w.appendChild(s);
+    });
+  });
+
+  /* rotating role line */
+  var roleTimer = 0;
+  function startRoles() {
+    clearTimeout(roleTimer);
+    var el = $('#role-text'), list = t('roles'), i = 0, j = 0, del = false;
+    if (reduceMotion) { el.textContent = list[0]; return; }
+    (function step() {
+      var w = list[i];
+      el.textContent = w.slice(0, j);
+      if (!del) {
+        if (j < w.length) { j++; roleTimer = setTimeout(step, 70); } else { del = true; roleTimer = setTimeout(step, 1700); }
+      } else {
+        if (j > 0) { j--; roleTimer = setTimeout(step, 34); } else { del = false; i = (i + 1) % list.length; roleTimer = setTimeout(step, 320); }
+      }
+    })();
+  }
+  var _renderAll = renderAll;
+  renderAll = function () { _renderAll(); startRoles(); };
 
   /* ------------------------------------------------------------------
      Start
