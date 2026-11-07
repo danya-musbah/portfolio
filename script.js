@@ -482,7 +482,7 @@
       '<p class="f-sum">' + firstSentence(L(p.desc)) + '</p>' + fm +
       '<div class="f-foot">' + (badges ? '<div class="badges">' + badges + '</div>' : '') +
       '<div class="tags" dir="ltr">' + tags + '</div>' +
-      '<span class="hint">' + t('flip_hint') + '</span></div>';
+      '<button class="flip-btn hint flip-front-btn" type="button" data-flip="' + p.id + '" aria-label="' + t('flip_label') + '">' + t('flip_hint') + '</button></div>';
 
     var pts = p.points ? '<ul>' + L(p.points).map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' : '';
     var metrics = p.metrics ? '<div class="metrics">' + p.metrics.map(function (m) { return '<div class="metric"><b>' + m[0] + '</b><span>' + L(m[1]) + '</span></div>'; }).join('') + '</div>' : '';
@@ -517,7 +517,7 @@
       '<h3 class="f-name">' + L(c.title) + '</h3>' +
       '<p class="f-sub">' + L(c.sub) + '</p>' +
       '<p class="f-sum">' + teaser(L(c.back)) + '</p>' +
-      '<div class="f-foot"><span class="hint">' + t('flip_hint') + '</span></div>';
+      '<div class="f-foot"><button class="flip-btn hint flip-front-btn" type="button" data-flip="' + c.id + '" aria-label="' + t('flip_label') + '">' + t('flip_hint') + '</button></div>';
     var back = '<div class="b-scroll">' + L(c.back).replace('%MARKS%', marks) + '</div>';
     return flipCard(c.id, front, back, L(c.title), Math.min(i, 4) * 0.07);
   }

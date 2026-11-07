@@ -352,6 +352,7 @@ html[dir="ltr"] .progress { transform-origin: left; }
 .f-foot { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
 .hint { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
 .hint::before { content: "\21BB"; color: var(--sun); font-size: 1rem; }
+.flip-front-btn { min-height: 44px; align-self: flex-start; padding-inline: 0; border: 0; text-align: start; }
 .badges { display: flex; flex-wrap: wrap; gap: 6px; }
 .badge { font-family: var(--mono); font-size: 0.72rem; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--sun); color: var(--sun); }
 .badge.b-ai { border-color: var(--ion); color: var(--ion); }
@@ -511,10 +512,18 @@ html[dir="rtl"] .dist i { transform-origin: right; }
 .tool-menu[aria-expanded="true"] .burger::after { transform: translateY(-5px) rotate(-45deg); }
 @media (max-width: 720px) {
   .tool-menu { display: inline-grid; }
-  .nav { display: none; position: absolute; top: 100%; inset-inline: 0; flex-direction: column; gap: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 4px 14px; box-shadow: 0 16px 30px var(--shadow); }
+  .bar-in { min-height: 60px; }
+  .tool { min-width: 44px; height: 44px; padding-inline: 10px; }
+  .nav { display: none; position: absolute; top: 100%; inset-inline: 0; flex-direction: column; gap: 0; max-height: calc(100vh - 60px - env(safe-area-inset-top, 0px)); max-height: calc(100dvh - 60px - env(safe-area-inset-top, 0px)); overflow-y: auto; overscroll-behavior: contain; background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 4px 14px; box-shadow: 0 16px 30px var(--shadow); }
   .nav.open { display: flex; animation: rise 0.3s ease both; }
-  .nav a { padding: 12px 8px; font-size: 1.05rem; border-bottom: 1px solid var(--line); }
+  .nav a { min-height: 48px; display: flex; align-items: center; padding: 10px 12px; font-size: 1.05rem; border-bottom: 1px solid var(--line); }
   .nav a[aria-current="true"] { border-bottom-color: var(--line); color: var(--sun); }
+  .toolbar > .filters { max-width: 100%; flex-wrap: nowrap; overflow-x: auto; padding: 4px 2px 8px; overscroll-behavior-inline: contain; scroll-snap-type: inline proximity; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .toolbar > .filters::-webkit-scrollbar { display: none; }
+  .toolbar > .filters .chip { flex: 0 0 auto; min-height: 44px; scroll-snap-align: start; }
+  .grid-2:not(.grid-s) .flip { --h: min(660px, 72vh); --h: clamp(460px, 72svh, 560px); }
+  .cta { gap: 8px; }
+  .cta > .btn, .cvmenu summary { min-height: 48px; padding-inline: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
